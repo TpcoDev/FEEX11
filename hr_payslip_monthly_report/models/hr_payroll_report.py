@@ -35,14 +35,13 @@ class PayrollReportView(models.Model):
     job_id = fields.Many2one('hr.job', string='Job Title')
     company_id = fields.Many2one('res.company', string='Company')
     department_id = fields.Many2one('hr.department', string='Department')
-    net = fields.Float(string='Net Salary')
     liq = fields.Float(string='Alcance liquido')
 
     def _select(self):
         select_str = """
         min(ps.id) as id,emp.id as name,jb.id as job_id,
         dp.id as department_id,cmp.id as company_id,
-        ps.date_from, ps.date_to, sum(psl.total) as net, ps.state as state
+        ps.date_from, ps.date_to, sum(psl.total) as liq, ps.state as state
         """
         return select_str
 
