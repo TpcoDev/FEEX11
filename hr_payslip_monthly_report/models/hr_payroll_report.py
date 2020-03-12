@@ -36,6 +36,7 @@ class PayrollReportView(models.Model):
     company_id = fields.Many2one('res.company', string='Company')
     department_id = fields.Many2one('hr.department', string='Department')
     net = fields.Float(string='Net Salary')
+    liq = fields.float(string='Alcance liquido')
 
     def _select(self):
         select_str = """
@@ -49,7 +50,7 @@ class PayrollReportView(models.Model):
         from_str = """
             hr_payslip_line psl  join hr_payslip ps on (ps.employee_id=psl.employee_id and ps.id=psl.slip_id)
             join hr_employee emp on (ps.employee_id=emp.id) join hr_department dp on (emp.department_id=dp.id)
-            join hr_job jb on (emp.department_id=jb.id) join res_company cmp on (cmp.id=ps.company_id) where psl.code='NET'
+            join hr_job jb on (emp.department_id=jb.id) join res_company cmp on (cmp.id=ps.company_id) where psl.code='LIQ'
          """
         return from_str
 
