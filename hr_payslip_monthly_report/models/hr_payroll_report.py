@@ -36,7 +36,7 @@ class PayrollReportView(models.Model):
     company_id = fields.Many2one('res.company', string='Company')
     department_id = fields.Many2one('hr.department', string='Department')
     net = fields.Float(string='Net Salary')
-    liq = fields.float(string='Alcance liquido')
+    liq = fields.Float(string='Alcance liquido')
 
     def _select(self):
         select_str = """
